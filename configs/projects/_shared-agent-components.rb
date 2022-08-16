@@ -22,7 +22,9 @@ end
 
 proj.component 'curl'
 proj.component 'puppet-ca-bundle'
-proj.component "ruby-#{proj.ruby_version}"
+if !platform.is_macos? && !platform.is_cross_compiled?
+  proj.component "ruby-#{proj.ruby_version}"
+end
 proj.component 'augeas' unless platform.is_windows?
 proj.component 'libxml2' unless platform.is_windows?
 proj.component 'libxslt' unless platform.is_windows?
