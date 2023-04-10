@@ -1,5 +1,5 @@
 component 'rubygem-nokogiri' do |pkg, _settings, _platform|
-  pkg.version '1.13.10'
+  pkg.version '1.14.2'
   pkg.sha256sum 'd3ee00f26c151763da1691c7fc6871ddd03e532f74f85101f5acedc2d099e958'
   instance_eval File.read('configs/components/_base-rubygem.rb')
 
