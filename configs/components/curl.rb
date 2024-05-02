@@ -33,6 +33,8 @@ component 'curl' do |pkg, settings, platform|
     pkg.environment 'PATH', "/opt/freeware/bin:$(PATH):#{settings[:bindir]}"
     # exclude -Wl,-brtl
     ldflags = "-L#{settings[:libdir]}"
+  # elsif platform.name == 'osx-12-arm64'
+  #   ldflags = "#{settings[:ldflags]} -framework CoreFoundation -framework CoreServices -framework SystemConfiguration"
   else
     pkg.environment "PATH", "/opt/pl-build-tools/bin:$(PATH):#{settings[:bindir]}"
   end
@@ -47,6 +49,10 @@ component 'curl' do |pkg, settings, platform|
     pkg.apply_patch 'resources/patches/curl/CVE-2023-46218.patch'
     pkg.apply_patch 'resources/patches/curl/CVE-2024-2004.patch'
     pkg.apply_patch 'resources/patches/curl/CVE-2024-2398.patch'
+  end
+
+  if platform.name == 'osx-12-arm64'
+    pkg.apply_patch 'resources/patches/curl/coreservices.patch'
   end
 
   configure_options = []
